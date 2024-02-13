@@ -37,6 +37,9 @@ function createGrid(size) {
                 this.classList.add('active');
                 // Scrivo il click in console
                 console.log(this)
+
+
+                
             })
 
             // Inserisco la cella nella griglia
@@ -64,20 +67,33 @@ createGridButton.addEventListener('click', function() {
         alert('Seleziona una dimensione valida!');
     };
 
-    
+    createBomb();
 });
 
 // Funzione per creare numeri casuali da 1 al numero totale delle caselle
 function createNumberRandom(){
 
     const numberRandom = Math.floor(Math.random() * Number(gridSizeSelect.value * gridSizeSelect.value) + 1);
-    console.log(numberRandom)
-
+    return numberRandom;
 }
 
 
 function createBomb(){
 
+    // Array vuoto
+    const bombs = [];
 
+    // Creo un ciclo do while per inserire le bombe nell'array
+    do{
+        const newNumber = createNumberRandom();
+
+        // Creo un if per verificare se las bomba è già all'interno dell'array
+        if( !bombs.includes(newNumber)){
+
+            bombs.push(newNumber);
+
+        }
+    } while ( bombs.length < 16)
     
+    console.log(bombs)
 }
