@@ -136,6 +136,14 @@ function createBomb(){
 function gameover(userInterface, result){
 
     userInterface.style.display = "block";
-    gameOverElement.innerHTML = "Game Over<br>Punteggio : " + result
+    gameOverElement.innerHTML = "Game Over<br>Punteggio : " + result;
+
+    const everyCells = gridContainer.querySelectorAll(".cell");
+
+    for( let i = 0; i < everyCells.length; i++){
+        if ( bombsArray.includes(Number(everyCells[i].innerText))){
+            everyCells[i].classList.add("bomba")
+        }
+    }
 
 }
