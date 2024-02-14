@@ -12,13 +12,16 @@ const userInterface = document.getElementById("user-interface");
 
 const resutlsElement = document.getElementById("user-result");
 
-const gameOver = document.getElementById("gameover");
+const gameOverElement = document.getElementById("gameover");
 
 // Dichiaro l'array delle bombe come variabile globale
 const bombsArray = [];
 
 // Inizializzo il punteggio a 0
 let result = 0;
+
+// Dichiaro una booleana per verificare se il gioco é finito
+let endGame = false;
 
 
 
@@ -46,24 +49,33 @@ function createGrid(size) {
             numberSpan.textContent = cellCounter;
             cell.appendChild(numberSpan)
             
+
             // Aggiungo un classe che cambia il
             // colore della cella al click
             cell.addEventListener('click', function(){
-                
-                // Verifico se la cella cliccata appartiene pure all'array bombe
-                if (bombsArray.includes(Number(this.innerText))){
-                    this.classList.add("bomba");
 
-                    // Vaumento il punteggio e do la classe active
-                } else if (!this.classList.contains("active")) {
-                    // aumento il punteggio
-                    result++;
-                    console.log(result)
+                if ( !endGame ){
+                    // Verifico se la cella cliccata appartiene pure all'array bombe
+                    if (bombsArray.includes(Number(this.innerText))){
+                        this.classList.add("bomba");
+    
+                        gameover(userInterface, result);
 
-                    this.classList.add('active');
-                    // Scrivo il click in console
-                    console.log(this.innerText)
+                        endGame = true;
+    
+                        // Vaumento il punteggio e do la classe active
+                    } else if (!this.classList.contains("active")) {
+                        // aumento il punteggio
+                        result++;
+                        console.log(result)
+    
+                        this.classList.add('active');
+                        // Scrivo il click in console
+                        console.log(this.innerText)
+                    }
+
                 }
+                
             })
 
             // Inserisco la cella nella griglia
@@ -117,4 +129,13 @@ function createBomb(){
     } while ( bombsArray.length < 16)
     
     console.log(bombsArray)
+}
+
+// Funzione che darà game over al click di una bomba
+
+function gameover(userInterface, result){
+
+    userInterface.style.display = "block";
+    gameOverElement.innerHTML = "Game Over<br>Punteggio : " + result
+
 }

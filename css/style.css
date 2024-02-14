@@ -33,7 +33,9 @@ h1{
 
 #user-interface #gameover{
     padding: 15px;
-    color: white;
+    /* color: white; */
+    font-weight: bold;
+    font-size: 1.5em;
     background-color: red;
     border-radius: 1em;
 }
