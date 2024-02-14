@@ -17,6 +17,11 @@ const gameOver = document.getElementById("gameover");
 // Dichiaro l'array delle bombe come variabile globale
 const bombsArray = [];
 
+// Inizializzo il punteggio a 0
+let result = 0;
+
+
+
 function createGrid(size) {
     // Svuoto il contenitore della griglia da 
     // eventuali elementi precedenti indesiderati
@@ -44,13 +49,20 @@ function createGrid(size) {
             // Aggiungo un classe che cambia il
             // colore della cella al click
             cell.addEventListener('click', function(){
-                this.classList.add('active');
-                // Scrivo il click in console
-                console.log(this.innerText)
-
+                
                 // Verifico se la cella cliccata appartiene pure all'array bombe
                 if (bombsArray.includes(Number(this.innerText))){
                     this.classList.add("bomba");
+
+                    // Vaumento il punteggio e do la classe active
+                } else if (!this.classList.contains("active")) {
+                    // aumento il punteggio
+                    result++;
+                    console.log(result)
+
+                    this.classList.add('active');
+                    // Scrivo il click in console
+                    console.log(this.innerText)
                 }
             })
 
