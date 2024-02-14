@@ -7,6 +7,16 @@ const createGridButton = document.getElementById('create-grid-button');
 // Dichiaro il menu a discesa che selezionerà la dimenzione della griglia
 const gridSizeSelect = document.getElementById('sizes-grid');
 
+// Dichiaro gli elementi della User Intefrace
+const userInterface = document.getElementById("user-interface");
+
+const resutlsElement = document.getElementById("user-result");
+
+const gameOver = document.getElementById("gameover");
+
+// Dichiaro l'array delle bombe come variabile globale
+const bombsArray = [];
+
 function createGrid(size) {
     // Svuoto il contenitore della griglia da 
     // eventuali elementi precedenti indesiderati
@@ -36,10 +46,12 @@ function createGrid(size) {
             cell.addEventListener('click', function(){
                 this.classList.add('active');
                 // Scrivo il click in console
-                console.log(this)
+                console.log(this.innerText)
 
-
-                
+                // Verifico se la cella cliccata appartiene pure all'array bombe
+                if (bombsArray.includes(Number(this.innerText))){
+                    this.classList.add("bomba");
+                }
             })
 
             // Inserisco la cella nella griglia
@@ -80,20 +92,17 @@ function createNumberRandom(){
 
 function createBomb(){
 
-    // Array vuoto
-    const bombs = [];
-
     // Creo un ciclo do while per inserire le bombe nell'array
     do{
         const newNumber = createNumberRandom();
 
         // Creo un if per verificare se las bomba è già all'interno dell'array
-        if( !bombs.includes(newNumber)){
+        if( !bombsArray.includes(newNumber)){
 
-            bombs.push(newNumber);
+            bombsArray.push(newNumber);
 
         }
-    } while ( bombs.length < 16)
+    } while ( bombsArray.length < 16)
     
-    console.log(bombs)
+    console.log(bombsArray)
 }
